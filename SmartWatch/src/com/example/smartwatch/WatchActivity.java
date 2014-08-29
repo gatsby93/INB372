@@ -1,5 +1,6 @@
 package com.example.smartwatch;
 
+<<<<<<< HEAD
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.os.Build;
@@ -28,5 +29,18 @@ public class WatchActivity extends Activity {
 
         // Move the camera instantly to NKUT with a zoom of 16.
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(NKUT, 16));
+=======
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
+public class WatchActivity extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_watch);
+>>>>>>> 8208b5a7cee3988a5effd7f0d7b452b75308de3e
     }
 }
