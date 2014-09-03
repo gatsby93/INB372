@@ -1,10 +1,5 @@
 # cache for current jar dependency. DO NOT EDIT.
 # format is <lastModified> <length> <SHA-1> <path>
 # Encoding is UTF-8
-<<<<<<< HEAD
 1409206595641 758727 efec67655f6db90757faa37201efcee2a9ec3507 F:\INN372_repo\appcompat_v7\libs\android-support-v4.jar
-1409297585790 758727 efec67655f6db90757faa37201efcee2a9ec3507 F:\INN372_repo\SmartWatch\libs\android-support-v4.jar
-=======
-1409206595641 758727 efec67655f6db90757faa37201efcee2a9ec3507 F:\eclipse workspace\INN372\SmartWatch\appcompat_v7\libs\android-support-v4.jar
-1409292280072 758727 efec67655f6db90757faa37201efcee2a9ec3507 F:\eclipse workspace\INN372\SmartWatch\SmartWatch\libs\android-support-v4.jar
->>>>>>> 8208b5a7cee3988a5effd7f0d7b452b75308de3e
+1409245182000 758727 efec67655f6db90757faa37201efcee2a9ec3507 F:\INN372_repo\SmartWatch\libs\android-support-v4.jar

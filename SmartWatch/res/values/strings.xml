@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
 <resources>
 
     <string name="app_name">SmartWatch</string>
     <string name="hello_world">Hello world!</string>
 
 </resources>
-=======
-<resources>
-
-    <string name="app_name">SmartWatch</string>
-    <string name="hello_world">Hello world!</string>
-
-</resources>
->>>>>>> 8208b5a7cee3988a5effd7f0d7b452b75308de3e

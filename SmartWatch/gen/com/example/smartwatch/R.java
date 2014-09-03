@@ -1451,8 +1451,6 @@ containing a value of this type.
         public static final int powered_by_google_light=0x7f020075;
     }
     public static final class id {
-        public static final int Meum=0x7f080051;
-        public static final int Painic_Button=0x7f080050;
         public static final int action_bar=0x7f08002e;
         public static final int action_bar_activity_content=0x7f080027;
         public static final int action_bar_container=0x7f08002d;
@@ -1476,7 +1474,7 @@ containing a value of this type.
         public static final int collapseActionView=0x7f080020;
         public static final int default_activity_button=0x7f08003a;
         public static final int dialog=0x7f080021;
-        public static final int digitalClock1=0x7f08004e;
+        public static final int digitalClock1=0x7f08004f;
         public static final int disableHome=0x7f08001b;
         public static final int dropdown=0x7f080022;
         public static final int edit_query=0x7f080042;
@@ -1494,7 +1492,7 @@ containing a value of this type.
         public static final int image=0x7f080039;
         public static final int listMode=0x7f080014;
         public static final int list_item=0x7f08003b;
-        public static final int map=0x7f08004f;
+        public static final int map=0x7f08004e;
         public static final int match_parent=0x7f08000c;
         public static final int middle=0x7f080024;
         public static final int monochrome=0x7f080013;
@@ -1586,7 +1584,8 @@ containing a value of this type.
         public static final int abc_search_view=0x7f030016;
         public static final int abc_simple_decor=0x7f030017;
         public static final int activity_watch=0x7f030018;
-        public static final int support_simple_spinner_dropdown_item=0x7f030019;
+        public static final int map_layout=0x7f030019;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001a;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 

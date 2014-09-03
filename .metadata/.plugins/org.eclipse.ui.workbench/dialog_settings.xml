@@ -16,6 +16,7 @@
 		<item value="com.android.ide.eclipse.adt.project.ExportWizard" key="ImportExportPage.STORE_SELECTED_EXPORT_WIZARD_ID"/>
 		<list key="ImportExportPage.STORE_EXPANDED_EXPORT_CATEGORIES">
 			<item value="com.android.ide.eclipse.wizards.category"/>
+			<item value="org.eclipse.debug.ui"/>
 		</list>
 	</section>
 </section>
