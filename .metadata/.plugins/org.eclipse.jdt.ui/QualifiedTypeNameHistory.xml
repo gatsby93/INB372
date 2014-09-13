@@ -3,6 +3,21 @@
 <fullyQualifiedTypeName name="android.support.v4.app.FragmentActivity"/>
 <fullyQualifiedTypeName name="com.google.android.gms.location.LocationListener"/>
 <fullyQualifiedTypeName name="android.location.LocationListener"/>
-<fullyQualifiedTypeName name="com.example.smartwatch.R.id"/>
 <fullyQualifiedTypeName name="com.google.android.gms.maps.SupportMapFragment"/>
+<fullyQualifiedTypeName name="android.location.Location"/>
+<fullyQualifiedTypeName name="android.widget.EditText"/>
+<fullyQualifiedTypeName name="android.widget.TextView"/>
+<fullyQualifiedTypeName name="android.R.string"/>
+<fullyQualifiedTypeName name="com.example.smartwatch.R.string"/>
+<fullyQualifiedTypeName name="android.widget.Button"/>
+<fullyQualifiedTypeName name="android.widget.Toast"/>
+<fullyQualifiedTypeName name="android.view.View"/>
+<fullyQualifiedTypeName name="android.view.MotionEvent"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="com.google.android.gms.internal.mc"/>
+<fullyQualifiedTypeName name="com.google.android.gms.maps.CameraUpdate"/>
+<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
+<fullyQualifiedTypeName name="android.content.Intent"/>
+<fullyQualifiedTypeName name="com.example.smartwatch.R.id"/>
 </qualifiedTypeNameHistroy>
