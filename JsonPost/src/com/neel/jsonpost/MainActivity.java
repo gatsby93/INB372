@@ -18,6 +18,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,7 +37,8 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-	private static final String URL ="http://luoxin-hp/locationservice/LocationService.svc/GetLocation";
+	//private static final String URL ="http://luoxin-hp/locationservice/LocationService.svc/GetLocation";
+	private static final String URL ="http://jonas.byethost10.com/psw/clement_gps.php";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,7 +60,7 @@ public class MainActivity extends Activity {
 			}
 		});	
 	}
-	
+	/*
 	public void POST2()
 	{
 		URL url;
@@ -90,6 +92,7 @@ public class MainActivity extends Activity {
 			ex.printStackTrace();
 		}	
 	}
+	*/
 	
 	public void POST()
 	{
@@ -100,31 +103,54 @@ public class MainActivity extends Activity {
 				// TODO Auto-generated method stub
 				InputStream inputStream = null;
 				String result ="";
+				//JSONObject json = data[0];
 				DefaultHttpClient hc = new DefaultHttpClient();
+				//HttpConnectionParams.setConnectionTimeout(hc.getParams(), 100000);
+				
+				JSONObject jsonResponse = null;
 				HttpPost httpPost = new HttpPost(URL);
 				try
 				{
+					pLocation location;
+					//StringEntity se = new StringEntity("json"+json.toString());
+					
 					String json="";
 					JSONObject  jsonObject = new JSONObject();
 					jsonObject.accumulate("Patient_ID", "CLEMENT");
 					jsonObject.accumulate("Latitude", 2.2222);
 					jsonObject.accumulate("Longitude", 33.3333);
 					json = jsonObject.toString();
-					StringEntity entity = new StringEntity(json);
-					httpPost.setEntity(entity);
-					//httpPost.setHeader("Accept","application/json");
-					//httpPost.setHeader("Content-type","application/json");
-					HttpResponse response = hc.execute(httpPost);
-					inputStream = response.getEntity().getContent();
 					
-					if(inputStream != null)
+					//System.out.println(json);
+					StringEntity se;
+					se = new StringEntity(json);
+					httpPost.setEntity(se);
+					
+					httpPost.setHeader("Accept","application/json");
+					httpPost.setHeader("Content-type","application/json");
+					//StringEntity entity = new StringEntity(json);
+					System.out.println("1");
+					//httpPost.setEntity(entity);				
+					System.out.println("2");
+				
+					HttpResponse response = (HttpResponse)hc.execute(httpPost);
+					System.out.println("3");
+
+					HttpEntity entity = response.getEntity();
+					System.out.println("4");
+					//inputStream = response.getEntity().getContent();
+					 
+					if(entity!=null)
 					{
-						result = convertInputStreamToString(inputStream);
-					}
-					else
-					{
-						result = "Did Not Work";
-					}					
+						System.out.println("5");
+						InputStream instream = entity.getContent();
+						result = convertInputStreamToString(instream);
+						instream.close();
+						System.out.println("6");	
+						System.out.println(result);
+						System.out.println(entity.toString());
+						Toast.makeText(getBaseContext(), "Success", Toast.LENGTH_LONG).show();
+					}		
 				}
 				catch(Exception e)
 				{
