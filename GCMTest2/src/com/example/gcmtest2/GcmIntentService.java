@@ -24,6 +24,7 @@ public class GcmIntentService extends IntentService
 {
 	public static final int NOTIFICATION_ID =1;
 	private NotificationManager mNotificationManager;
+	NotificationCompat.Builder builder;
 	private final static String TAG ="GcmIntentService";
 	
 	public GcmIntentService()
@@ -63,6 +64,7 @@ public class GcmIntentService extends IntentService
 				}
 				Log.d(TAG,"Completed work @" + SystemClock.elapsedRealtime());
 				sendNotification(extras.getString("message"));
+				Log.i(TAG,"Received" + extras.toString());
 			}
 		}//RELEASE THE WAKE LOCK PROVIDED BY WAKEFULBROADCASTRECEIVER
 		GcmBroadcastReceiver.completeWakefulIntent(intent);
@@ -76,9 +78,7 @@ public class GcmIntentService extends IntentService
 		//SMALLICON MAYBE NEED CHANGE TO ICON
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this).setSmallIcon(R.drawable.ic_launcher).setContentTitle("GCM NOTIFICATION").setStyle(new NotificationCompat.BigTextStyle().bigText(msg)) .setContentText(msg).setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);
 		mBuilder.setContentIntent(contentIntent);         
-		mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());       
-		          
-		
+		mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());       	
 	}
 	
 

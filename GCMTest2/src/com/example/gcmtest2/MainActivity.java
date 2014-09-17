@@ -6,6 +6,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -17,6 +18,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+@SuppressLint("NewApi")
 public class MainActivity extends Activity {
 	private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 	public static final String EXTRA_MESSAGE = "message";
@@ -42,12 +44,22 @@ public class MainActivity extends Activity {
 			
 			if(regid.isEmpty())
 			{
+				System.out.println("1");
 				registerInBackground();
+				System.out.println("2");
 			}
+			//MAYBE REQUIRED MAYBE NOT? IF NOT NECESSARY PUT OUTER ELSE INTO THIS
 			else
 			{
-				Log.d(TAG, "No valid Google Play Services APK Found");
+				System.out.println("3");
+				Log.i(TAG, regid);
+				System.out.println(regid);
 			}
+		}
+		else
+		{
+			System.out.println("4");
+			Log.i(TAG, "No valid Google Play Services APK Found");
 		}
 	}
 
@@ -68,7 +80,7 @@ public class MainActivity extends Activity {
 			}
 			else
 			{
-				Log.d(TAG, "This device is not supported - Google Play Services");
+				Log.i(TAG, "This device is not supported - Google Play Services");
 				finish();
 			}
 			return false;
@@ -76,18 +88,19 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
+	@SuppressLint("NewApi")
 	private String getRegistrationId(Context context)
 	{
 		final SharedPreferences prefs = getGCMPreferences(context);
 		   String registrationId = prefs.getString(PROPERTY_REG_ID, "");
 		   if (registrationId.isEmpty()) {
-		       Log.d(TAG, "Registration ID not found.");
+		       Log.i(TAG, "Registration ID not found.");
 		       return "";
 		   }
 		   int registeredVersion = prefs.getInt(PROPERTY_APP_VERSION, Integer.MIN_VALUE);
 		   int currentVersion = getAppVersion(context);
 		   if (registeredVersion != currentVersion) {
-		        Log.d(TAG, "App version changed.");
+		        Log.i(TAG, "App version changed.");
 		        return "";
 		    }
 		    return registrationId;
@@ -161,8 +174,9 @@ public class MainActivity extends Activity {
 					}
 					regid = gcm.register(SENDER_ID);
 					msg = "Device registered, registration ID=" + regid;
-					Log.d(TAG,"########################################");
-					Log.d(TAG, "Current Device's Registration ID is: "+msg); 
+					Log.i(TAG,"########################################");
+					Log.i(TAG, "Current Device's Registration ID is: "+msg); 
+					System.out.println(msg);
 					
 					//SENDS REGID TO SERVER
 					 sendRegistrationIdToBackend();
@@ -180,6 +194,7 @@ public class MainActivity extends Activity {
 			{
 				//MAYBE NEED TO STORE REGISTRATION ID HERE
 				//do something here
+				//mDisplay.append(msg + "\n");
 			}
 		}.execute(null,null,null);
 	}
