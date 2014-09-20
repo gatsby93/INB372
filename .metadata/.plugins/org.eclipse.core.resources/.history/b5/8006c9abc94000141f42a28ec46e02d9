@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <Button
+        android:id="@+id/btnPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="155dp"
+        android:layout_marginLeft="30dp"
+        android:text="Yes,I do." />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnPost"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="106dp"
+        android:text="Do you want to send your current location to the server?" />
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView1"
+        android:layout_marginRight="49dp"
+        android:text="No,I don't." />
+
+    <ImageButton
+        android:id="@+id/btPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnPost"
+        android:layout_alignLeft="@+id/btnPost"
+        android:layout_marginBottom="44dp"
+        android:src="@drawable/btyes" />
+
+    <ImageButton
+        android:id="@+id/btCancle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnCancel"
+        android:layout_alignTop="@+id/btPost"
+        android:layout_marginLeft="21dp"
+        android:src="@drawable/btno" />
+
+</RelativeLayout>

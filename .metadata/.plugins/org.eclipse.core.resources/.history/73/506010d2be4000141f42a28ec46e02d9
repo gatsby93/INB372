@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <Button
+        android:id="@+id/Caretaker_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Pantient_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:drawableTop="@drawable/btc"/>
+
+    <Button
+        android:id="@+id/Pantient_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="117dp"
+        android:drawableBottom="@drawable/btp"
+        android:minWidth="64dip" />
+
+</RelativeLayout>

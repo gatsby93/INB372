@@ -1,0 +1,17 @@
+{
+  "C:\\Users\\Quan\\AppData\\Local\\Android\\android-sdk\\platforms\\android-17\\android.jar": {
+    "location": "C:\\Users\\Quan\\AppData\\Local\\Android\\android-sdk\\platforms\\android-17\\android.jar",
+    "status": "UNRESOLVED",
+    "error": "No call model found for \u0027C:\\Users\\Quan\\AppData\\Local\\Android\\android-sdk\\platforms\\android-17\\android.jar\u0027. Neither fingerprint \u0027322db3959c3383f4be9daa75ffa427d1485879ad\u0027 nor symbolic name \u0027android\u0027 are known."
+  },
+  "C:\\Users\\Quan\\Desktop\\SWP\\PatientsApp\\gen": {
+    "location": "C:\\Users\\Quan\\Desktop\\SWP\\PatientsApp\\gen",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027C:\\Users\\Quan\\Desktop\\SWP\\PatientsApp\\gen\u0027. Skipped."
+  },
+  "C:\\Users\\Quan\\Desktop\\SWP\\SmartWatch\\gen": {
+    "location": "C:\\Users\\Quan\\Desktop\\SWP\\SmartWatch\\gen",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027C:\\Users\\Quan\\Desktop\\SWP\\SmartWatch\\gen\u0027. Skipped."
+  }
+}

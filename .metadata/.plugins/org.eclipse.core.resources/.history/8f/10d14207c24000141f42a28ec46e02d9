@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <Button
+        android:id="@+id/Caretaker_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Pantient_btn"
+        android:layout_centerHorizontal="true"      
+        android:drawableTop="@drawable/btc"
+        android:padding="@dimen/dialog_fixed_height_major" />
+
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Pantient_btn"
+        android:layout_alignParentTop="true"
+        android:padding="@dimen/dialog_fixed_height_minor"
+        android:src="@drawable/btp" />
+
+    <Button
+        android:id="@+id/Pantient_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageButton1"
+        android:drawableBottom="@drawable/btp"
+        android:padding="@dimen/dialog_fixed_height_minor" />
+
+</RelativeLayout>
