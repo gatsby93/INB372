@@ -17,7 +17,7 @@
         android:required="true"/>
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="21" />
+        android:targetSdkVersion="18" />
 
     <application
         android:allowBackup="true"
@@ -38,6 +38,9 @@
         </activity>
         <activity android:name="PantientApp"></activity>
         <activity android:name="CaretakerApp"></activity>
+        <activity android:name="ConfirmLoc"></activity>
+        <activity android:name="SubMenu"></activity>
+        <activity android:name="HelpMenu"></activity>
     	<meta-data
     		android:name="com.google.android.maps.v2.API_KEY"
     		android:value="AIzaSyB7dOCZvhAJqTo19ZxhZqQhUhS1wv_fiCU"/>

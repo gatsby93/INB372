@@ -1,9 +1,8 @@
 package com.example.smartwatch;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
-import android.location.Criteria;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -11,18 +10,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -38,6 +31,7 @@ public class PantientApp extends FragmentActivity implements LocationListener
 	private static final String TAG = "MyActivity";
 
     private double lat, lng;
+    private Button btn1;
 	
     //@TargetApi(Build.VERSION_CODES.HONEYCOMB) @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,40 +66,142 @@ public class PantientApp extends FragmentActivity implements LocationListener
                         locLis);
 
        
+				
+        btn1 = (Button) findViewById(R.id.postbtn);
+        btn1.setOnClickListener(new View.OnClickListener(){
 
-        
-        /*try to get current long and lat, not completed just skip that...
-        but.setOnClickListener(new Button.OnClickListener(){ 
-            public void onClick(View v)
-            {
-                //Toast提示控件
-                Toast.makeText(WatchActivity.this,
-                        "TextView里的文字发生了改变,你注意到了吗?", 
-                        Toast.LENGTH_LONG).show();
-                //将TextView的文字发生改变
-                text.setText("欢迎来到魏祝林的博客!");
-            }
-        });
-        //int dLong;
-		//double dLat;
-       // dLong = (int) map.getMyLocation().getLongitude();
-       // dLat =  map.getMyLocation().getLatitude();
-      //  text.setText(dLong);*/
-        
+			@Override
+			public void onClick(View v) {
+				// TODO 自动生成的方法存根
+				// call AsynTask to perform network operation on separate thread
+				//lat2 = lat;
+				//lng2 = lng;
+				//Marker ml = map.addMarker(new MarkerOptions().position(new LatLng(lat2,
+           			 //lng2)).title("My location").snippet("current"));
+				Intent intent = new Intent(PantientApp.this, ConfirmLoc.class);
+				startActivity(intent);
+			}
+		});
     }
-
-    public class MyLocationListener implements LocationListener {
+    
+    /*
+    public JSONObject POST(String url, pLocation location){
+        InputStream inputStream = null;
+        String result = "";
+        try {
+ 
+            // 1. create HttpClient
+            HttpClient httpclient = new DefaultHttpClient();
+ 
+            // 2. make POST request to the given URL
+            HttpPost httpPost = new HttpPost(url);
+ 
+            String json = "";
+ 
+            // 3. build jsonObject
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.accumulate("Patient_ID", location.getPatient());
+            jsonObject.accumulate("Latitude", location.getLat());
+            jsonObject.accumulate("Longitude", location.getLng());
+ 
+            // 4. convert JSONObject to JSON to String
+            json = jsonObject.toString();
+ 
+            // ** Alternative way to convert Person object to JSON string usin Jackson Lib 
+            // ObjectMapper mapper = new ObjectMapper();
+            // json = mapper.writeValueAsString(person); 
+ 
+            // 5. set json to StringEntity
+            StringEntity se = new StringEntity(json,HTTP.UTF_8);
+ 
+            // 6. set httpPost Entity
+            httpPost.setEntity(se);
+ 
+            // 7. Set some headers to inform server about the type of the content   
+            httpPost.setHeader("Accept", "application/json");
+            httpPost.setHeader("Content-type", "application/json");
+ 
+            // 8. Execute POST request to the given URL
+            HttpResponse httpResponse = httpclient.execute(httpPost);
+ 
+            // 9. receive response as inputStream
+            inputStream = httpResponse.getEntity().getContent();
+ 
+            // 10. convert inputstream to string
+            if(inputStream != null)
+                result = convertInputStreamToString(inputStream);
+            else
+                result = "Did not work!";
+            
+        } catch (Exception e) {
+            Log.d("InputStream", e.getLocalizedMessage());
+        }
+ 
+        // 11. return result
+        JSONObject jsono = null;
+        try{
+        	jsono = new JSONObject(result);
+        	
+        }catch (JSONException e)
+        {
+        	e.printStackTrace();
+        }
+        return jsono;
+    }
+    private static String convertInputStreamToString(InputStream inputStream) throws IOException {
+		// TODO 自动生成的方法存根
+    	BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
+        String line = "";
+        String result = "";
+        while((line = bufferedReader.readLine()) != null)
+            result += line;
+ 
+        inputStream.close();
+        return result;
+	}
+	private class postData extends AsyncTask<Void, Void, JSONObject>{
+		ProgressDialog dialog;
+		// onPostExecute displays the results of the AsyncTask.
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			if (android.os.Build.VERSION.SDK_INT >= 11) {
+				dialog = new ProgressDialog(PantientApp.this, ProgressDialog.THEME_HOLO_LIGHT);
+			}else{
+				dialog = new ProgressDialog(PantientApp.this);
+			}
+			dialog.setMessage(Html.fromHtml("<b>"+"Loading..."+"</b>"));
+			dialog.setIndeterminate(true);
+			dialog.setCancelable(false);
+			dialog.show();
+		}
+		@Override
+        protected void onPostExecute(JSONObject result) {
+            super.onPostExecute(result);
+            if (result != null){
+            	dialog.dismiss();
+            }
+            else{
+            	 Toast.makeText(getBaseContext(), "Succes", Toast.LENGTH_LONG).show();
+            }
+       }
+		@Override
+		protected JSONObject doInBackground(Void... params) {
+			// TODO 自动生成的方法存根
+			return POST(URL,location);
+		}
+	}
+*/
+	public class MyLocationListener implements LocationListener {
         @Override
         
         public void onLocationChanged(Location loc) {
             if (loc != null) {
-            	CameraUpdate center=
-            			 CameraUpdateFactory.newLatLng(new LatLng(lat,
-            			 lng));
-            			CameraUpdate zoom=CameraUpdateFactory.zoomTo(15);
+            	CameraUpdate center= CameraUpdateFactory.newLatLng(new LatLng(lat,lng));
+            	CameraUpdate zoom=CameraUpdateFactory.zoomTo(15);
             			 
-            			map.moveCamera(center);
-            			map.animateCamera(zoom);
+            	map.moveCamera(center);
+           		map.animateCamera(zoom);
             			
             }
         }

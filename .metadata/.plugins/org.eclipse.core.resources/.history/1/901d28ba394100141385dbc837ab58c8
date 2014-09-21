@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <DigitalClock
+        android:id="@+id/digitalClock1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="DigitalClock"
+        android:textSize="70sp" />
+
+    <Button
+        android:id="@+id/Painc_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/digitalClock1"
+        android:layout_centerHorizontal="true"
+        android:text="Painc" />
+
+    <Button
+        android:id="@+id/Help_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Painc_btn"
+        android:layout_below="@+id/Painc_btn"
+        android:layout_marginTop="48dp"
+        android:text=" Help " />
+
+    <Button
+        android:id="@+id/Map_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Help_btn"
+        android:layout_below="@+id/Help_btn"
+        android:layout_marginTop="52dp"
+        android:text=" Map " />
+
+</RelativeLayout>

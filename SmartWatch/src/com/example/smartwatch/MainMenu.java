@@ -21,7 +21,7 @@ public class MainMenu extends Activity
 			public void onClick(View v) {
 				// TODO 自动生成的方法存根
 				//SWAP FROM MAINACTIVITY CLASS TO WATCH ACTIVITY CLASS
-				Intent intent = new Intent(MainMenu.this, PantientApp.class);
+				Intent intent = new Intent(MainMenu.this, SubMenu.class);
 				startActivity(intent);
 			}
 		});
