@@ -322,8 +322,9 @@ int drawable ic_plusone_medium_off_client 0x7f020070
 int drawable ic_plusone_small_off_client 0x7f020071
 int drawable ic_plusone_standard_off_client 0x7f020072
 int drawable ic_plusone_tall_off_client 0x7f020073
-int drawable powered_by_google_dark 0x7f020074
-int drawable powered_by_google_light 0x7f020075
+int drawable logo 0x7f020074
+int drawable powered_by_google_dark 0x7f020075
+int drawable powered_by_google_light 0x7f020076
 int id action_bar 0x7f08002e
 int id action_bar_activity_content 0x7f080027
 int id action_bar_container 0x7f08002d
@@ -335,7 +336,7 @@ int id action_context_bar 0x7f08002f
 int id action_menu_divider 0x7f080028
 int id action_menu_presenter 0x7f080029
 int id action_mode_close_button 0x7f080036
-int id action_settings 0x7f08004e
+int id action_settings 0x7f080051
 int id activity_chooser_view_content 0x7f080037
 int id always 0x7f08001e
 int id beginning 0x7f080023
@@ -397,8 +398,11 @@ int id strict_sandbox 0x7f080009
 int id submit_area 0x7f08004b
 int id tabMode 0x7f080015
 int id terrain 0x7f080003
+int id textView2 0x7f08004e
 int id title 0x7f08003d
 int id top_action_bar 0x7f080032
+int id txtID 0x7f080050
+int id txtMessage 0x7f08004f
 int id up 0x7f080033
 int id useLogo 0x7f080016
 int id withText 0x7f08001f
@@ -473,6 +477,8 @@ int string common_google_play_services_update_title 0x7f07000c
 int string common_signin_button_text 0x7f070017
 int string common_signin_button_text_long 0x7f070018
 int string hello_world 0x7f070028
+int string txtID 0x7f07002a
+int string txtMessage 0x7f07002b
 int string wallet_buy_button_place_holder 0x7f070019
 int style AppBaseTheme 0x7f050090
 int style AppTheme 0x7f050091

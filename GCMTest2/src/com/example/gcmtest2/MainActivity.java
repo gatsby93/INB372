@@ -20,6 +20,7 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -28,6 +29,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 @SuppressLint("NewApi")
 public class MainActivity extends Activity {
@@ -41,14 +43,37 @@ public class MainActivity extends Activity {
     private String regid = null;
     SharedPreferences prefs;
     private Context context= null;
-    private static final String URL ="http://172.19.10.119/locationservice/LocationService.svc/GetLocation";
-
+    private static final String URL ="http://172.19.31.119/locationservice/LocationService.svc/GetLocation";
+    TextView txtID;
+    TextView txtMessage;
+    JSONObject json;
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		context = getApplicationContext();
 		
+		Intent intent = getIntent();
+		txtID = (TextView)findViewById(R.id.txtID);
+		txtMessage = (TextView)findViewById(R.id.txtMessage);
+		String message = intent.getExtras().getString("message");
+		try
+		{
+			json = new JSONObject();
+			String sID = json.getString("ID");
+			txtID.setText(sID);
+			
+			String sMsg = json.getString("Msg");
+			txtMessage.setText(sMsg);	
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		
+		
+		//contentIntent;
 		if(checkPlayServices())
 		{
 			gcm = GoogleCloudMessaging.getInstance(this);
@@ -257,6 +282,7 @@ public class MainActivity extends Activity {
 				instream.close();
 				System.out.println("6");	
 				System.out.println(result);
+				
 				System.out.println(entity.toString());
 				//Toast.makeText(getBaseContext(), "Success", Toast.LENGTH_LONG).show();
 			}		

@@ -1456,8 +1456,9 @@ containing a value of this type.
         public static final int ic_plusone_small_off_client=0x7f020071;
         public static final int ic_plusone_standard_off_client=0x7f020072;
         public static final int ic_plusone_tall_off_client=0x7f020073;
-        public static final int powered_by_google_dark=0x7f020074;
-        public static final int powered_by_google_light=0x7f020075;
+        public static final int logo=0x7f020074;
+        public static final int powered_by_google_dark=0x7f020075;
+        public static final int powered_by_google_light=0x7f020076;
     }
     public static final class id {
         public static final int action_bar=0x7f08002e;
@@ -1471,7 +1472,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f080028;
         public static final int action_menu_presenter=0x7f080029;
         public static final int action_mode_close_button=0x7f080036;
-        public static final int action_settings=0x7f08004e;
+        public static final int action_settings=0x7f080051;
         public static final int activity_chooser_view_content=0x7f080037;
         public static final int always=0x7f08001e;
         public static final int beginning=0x7f080023;
@@ -1533,8 +1534,11 @@ containing a value of this type.
         public static final int submit_area=0x7f08004b;
         public static final int tabMode=0x7f080015;
         public static final int terrain=0x7f080003;
+        public static final int textView2=0x7f08004e;
         public static final int title=0x7f08003d;
         public static final int top_action_bar=0x7f080032;
+        public static final int txtID=0x7f080050;
+        public static final int txtMessage=0x7f08004f;
         public static final int up=0x7f080033;
         public static final int useLogo=0x7f080016;
         public static final int withText=0x7f08001f;
@@ -1730,6 +1734,8 @@ containing a value of this type.
          */
         public static final int common_signin_button_text_long=0x7f070018;
         public static final int hello_world=0x7f070028;
+        public static final int txtID=0x7f07002a;
+        public static final int txtMessage=0x7f07002b;
         /**  Text on a placeholder buy button when Google Play services is not
          available or up-to-date 
          */

@@ -19,6 +19,10 @@ public class GcmBroadcastReceiver extends WakefulBroadcastReceiver {
 		setResultCode(Activity.RESULT_OK);
 		
 		Toast.makeText(context, "WOW!!! RECEIVED NEW NOTIFCATION", Toast.LENGTH_LONG).show();
+		String state = intent.getStringExtra("state");
+		System.out.println(state);
+		
+		//MEDICINE RESPONSE FROM PATIENTS
 	}
 
 }

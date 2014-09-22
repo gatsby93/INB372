@@ -9,8 +9,28 @@
     tools:context="com.example.gcmtest2.MainActivity" >
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_world" />
+
+    <TextView
+        android:id="@+id/txtMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="46dp"
+        android:layout_toRightOf="@+id/textView2"
+        android:text="@string/txtMessage" />
+
+    <TextView
+        android:id="@+id/txtID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtMessage"
+        android:layout_alignBottom="@+id/txtMessage"
+        android:layout_alignLeft="@+id/textView2"
+        android:text="@string/txtID" />
 
 </RelativeLayout>

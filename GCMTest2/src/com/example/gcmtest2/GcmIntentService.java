@@ -70,15 +70,34 @@ public class GcmIntentService extends IntentService
 		GcmBroadcastReceiver.completeWakefulIntent(intent);
 	}
 	
+	
 	private void sendNotification(String msg)
 	{
 		mNotificationManager = (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
-		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0);
 		
-		//SMALLICON MAYBE NEED CHANGE TO ICON
-		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this).setSmallIcon(R.drawable.ic_launcher).setContentTitle("GCM NOTIFICATION").setStyle(new NotificationCompat.BigTextStyle().bigText(msg)) .setContentText(msg).setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);
-		mBuilder.setContentIntent(contentIntent);         
-		mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());       	
+		//NEW CODES TESTING
+		Intent myIntent = new Intent(this, MainActivity.class);
+		myIntent.putExtra("message", msg);
+		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+		
+		 NotificationCompat.Builder mBuilder =
+	                new NotificationCompat.Builder(this)
+	        .setSmallIcon(R.drawable.logo)
+	        .setContentTitle("GCM Notification")
+	        .setStyle(new NotificationCompat.BigTextStyle()
+	        .bigText(msg))
+	        .setContentText(msg);
+
+	        mBuilder.setContentIntent(contentIntent);
+	        mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+		
+//		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0);
+//		
+//		//SMALLICON MAYBE NEED CHANGE TO ICON
+//		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this).setSmallIcon(R.drawable.logo).setContentTitle("GCM NOTIFICATION").setStyle(new NotificationCompat.BigTextStyle().bigText(msg)) .setContentText(msg).setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);
+//		mBuilder.setContentIntent(contentIntent);  
+//		//System.out.println(contentIntent.toString());
+//		mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());       	
 	}
 	
 
