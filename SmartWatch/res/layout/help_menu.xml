@@ -3,35 +3,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context="${relativePackage}.${activityClass}" >
-
-    <Button
-        android:id="@+id/Bathroom_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="114dp"
-        android:text="Bathroom " />
-
-    <Button
-        android:id="@+id/Eat_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Bathroom_btn"
-        android:layout_alignRight="@+id/Bathroom_btn"
-        android:layout_below="@+id/Bathroom_btn"
-        android:layout_marginTop="71dp"
-        android:text="   Eat   " />
 
     <Button
         android:id="@+id/Back_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Eat_btn"
-        android:layout_alignRight="@+id/Eat_btn"
-        android:layout_below="@+id/Eat_btn"
-        android:layout_marginTop="63dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="118dp"
         android:text=" Back " />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Back_btn"
+        android:layout_alignLeft="@+id/imageButton1"
+        android:layout_marginBottom="60dp"
+        android:layout_weight="1"
+        android:background="@null"
+        android:src="@drawable/bathroom" />
+
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageButton2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="34dp"
+        android:layout_weight="1"
+        android:background="@null"
+        android:src="@drawable/food" />
 
 </RelativeLayout>

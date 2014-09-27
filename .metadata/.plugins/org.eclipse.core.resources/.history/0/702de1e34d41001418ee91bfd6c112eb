@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <Button
+        android:id="@+id/Back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/digitalClock1"
+        android:layout_marginBottom="65dp"
+        android:text="Back" />
+
+    <Button
+        android:id="@+id/Map_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/Back_btn"
+        android:layout_alignBottom="@+id/Back_btn"
+        android:layout_centerHorizontal="true"
+        android:text=" Map " />
+
+    <Button
+        android:id="@+id/Help_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/Map_btn"
+        android:layout_alignBottom="@+id/Map_btn"
+        android:layout_alignLeft="@+id/digitalClock1"
+        android:text=" Help " />
+
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Back_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="46dp"
+        android:layout_weight="1"
+        android:background="@null"
+        android:src="@drawable/btpb" />
+
+    <DigitalClock
+        android:id="@+id/digitalClock1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="DigitalClock"
+        android:textColor="#ffffff"
+        android:textSize="70sp" />
+
+</RelativeLayout>

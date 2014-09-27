@@ -26,6 +26,7 @@ import org.json.JSONObject;
 //import com.example.smartwatch.Person;
 
 
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -35,6 +36,7 @@ import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class ConfirmLoc extends Activity {
@@ -47,8 +49,8 @@ public class ConfirmLoc extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.confirm_loc);
 		
-		Button btnPost,btnCancel;
-		btnCancel = (Button)findViewById(R.id.btnCancel);
+		ImageButton btnPost,btnCancel;
+		btnCancel = (ImageButton)findViewById(R.id.imageButton2);
 		btnCancel.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -57,7 +59,7 @@ public class ConfirmLoc extends Activity {
 				startActivity(intent);
 			}
 		});	
-		btnPost = (Button)findViewById(R.id.btnPost);
+		btnPost = (ImageButton)findViewById(R.id.imageButton1);
 		btnPost.setOnClickListener(new View.OnClickListener() {
 			
 			@Override

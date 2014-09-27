@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context="${relativePackage}.${activityClass}" >
 
     <DigitalClock
@@ -11,43 +12,49 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:text="DigitalClock"
+        android:textColor="#ffffff"
         android:textSize="70sp" />
 
-    <Button
-        android:id="@+id/Painc_btn"
+    <ImageButton
+        android:id="@+id/imageButton1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/digitalClock1"
         android:layout_centerHorizontal="true"
-        android:text="Painc" />
-
-    <Button
-        android:id="@+id/Help_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Painc_btn"
-        android:layout_below="@+id/Painc_btn"
-        android:layout_marginTop="48dp"
-        android:text=" Help " />
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:background="@null"
+        android:src="@drawable/btpb" />
 
     <Button
         android:id="@+id/Map_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Help_btn"
-        android:layout_below="@+id/Help_btn"
-        android:layout_marginTop="52dp"
+        android:layout_alignBaseline="@+id/Back_btn"
+        android:layout_alignBottom="@+id/Back_btn"
+        android:layout_centerHorizontal="true"
         android:text=" Map " />
+
+    <Button
+        android:id="@+id/Help_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/Map_btn"
+        android:layout_alignBottom="@+id/Map_btn"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="24dp"
+        android:text=" Help " />
 
     <Button
         android:id="@+id/Back_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Map_btn"
-        android:layout_alignRight="@+id/Map_btn"
-        android:layout_below="@+id/Map_btn"
-        android:layout_marginTop="42dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="59dp"
+        android:layout_marginRight="25dp"
         android:text="Back" />
 
 </RelativeLayout>

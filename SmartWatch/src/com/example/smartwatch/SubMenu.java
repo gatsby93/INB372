@@ -18,12 +18,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 
 public class SubMenu extends Activity
 {
-	Button btn1,btn2,btn3,btn4;
-	
+	Button btn1,btn3,btn4;
+	ImageButton btn2;
 	
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +41,7 @@ public class SubMenu extends Activity
 				startActivity(intent);
 			}
 		});
-        btn2 = (Button) findViewById(R.id.Painc_btn);
+        btn2 = (ImageButton) findViewById(R.id.imageButton1);
         btn2.setOnClickListener(new View.OnClickListener(){
 
 			@Override

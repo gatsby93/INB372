@@ -1,71 +1,58 @@
 package com.example.smartwatch;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-
 public class PantientApp extends FragmentActivity implements LocationListener
 {
 
+    
 	static final LatLng NKUT = new LatLng(-27.477112,153.028015);
 	private GoogleMap map;
 	
 	private static final String TAG = "MyActivity";
 
-    private double lat, lng;
+    private double lat, lng, la,ln;
+    private float radius;
     private Button btn1;
 	
     //@TargetApi(Build.VERSION_CODES.HONEYCOMB) @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_watch);
-        
-        SupportMapFragment mf = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        map = mf.getMap();
-        //TextView text=(EditText)findViewById(R.id.text_View); 
-        //Button but=(Button)findViewById(R.id.button1);
-        
-        Marker nkut = map.addMarker(new MarkerOptions().position(NKUT).title("QUT").snippet("GP"));
-
-        // Move the camera instantly to NKUT with a zoom of 16.
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(NKUT, 16));
-        
-        map.setMyLocationEnabled(true);
-        map.setMapType(map.MAP_TYPE_NORMAL);
-        
-        
-        LocationManager locMan = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Location loc = locMan.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        if (loc != null) {
-            lat = loc.getLatitude();
-            Log.d(TAG, "latitude: " + lat);
-            lng = loc.getLongitude();
-            Log.d(TAG, "longitude: " + lng);
-        }
-        
-        LocationListener locLis = new MyLocationListener();
-        locMan.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 10,
-                        locLis);
-
-       
+       la = -27.477112;
+       ln = 153.028015;
+       radius = 200;
+       //MAP
+       CreateMap();
+       System.out.println("1");
+       //FENCE
+       CreateFence(-27.477112,153.028015,9000,map);
+       System.out.println("2");
+       //GPS
+       SetGPS();
+       System.out.println("3");
+       //In or out
+       OutFence();
+       System.out.println("4");
 				
         btn1 = (Button) findViewById(R.id.postbtn);
         btn1.setOnClickListener(new View.OnClickListener(){
@@ -83,127 +70,109 @@ public class PantientApp extends FragmentActivity implements LocationListener
 			}
 		});
     }
-    
-    /*
-    public JSONObject POST(String url, pLocation location){
-        InputStream inputStream = null;
-        String result = "";
-        try {
- 
-            // 1. create HttpClient
-            HttpClient httpclient = new DefaultHttpClient();
- 
-            // 2. make POST request to the given URL
-            HttpPost httpPost = new HttpPost(url);
- 
-            String json = "";
- 
-            // 3. build jsonObject
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.accumulate("Patient_ID", location.getPatient());
-            jsonObject.accumulate("Latitude", location.getLat());
-            jsonObject.accumulate("Longitude", location.getLng());
- 
-            // 4. convert JSONObject to JSON to String
-            json = jsonObject.toString();
- 
-            // ** Alternative way to convert Person object to JSON string usin Jackson Lib 
-            // ObjectMapper mapper = new ObjectMapper();
-            // json = mapper.writeValueAsString(person); 
- 
-            // 5. set json to StringEntity
-            StringEntity se = new StringEntity(json,HTTP.UTF_8);
- 
-            // 6. set httpPost Entity
-            httpPost.setEntity(se);
- 
-            // 7. Set some headers to inform server about the type of the content   
-            httpPost.setHeader("Accept", "application/json");
-            httpPost.setHeader("Content-type", "application/json");
- 
-            // 8. Execute POST request to the given URL
-            HttpResponse httpResponse = httpclient.execute(httpPost);
- 
-            // 9. receive response as inputStream
-            inputStream = httpResponse.getEntity().getContent();
- 
-            // 10. convert inputstream to string
-            if(inputStream != null)
-                result = convertInputStreamToString(inputStream);
-            else
-                result = "Did not work!";
-            
-        } catch (Exception e) {
-            Log.d("InputStream", e.getLocalizedMessage());
-        }
- 
-        // 11. return result
-        JSONObject jsono = null;
-        try{
-        	jsono = new JSONObject(result);
-        	
-        }catch (JSONException e)
-        {
-        	e.printStackTrace();
-        }
-        return jsono;
+
+    public void CreateMap(){ 
+    	SupportMapFragment mf = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        map = mf.getMap();
+        //TextView text=(EditText)findViewById(R.id.text_View); 
+        //Button but=(Button)findViewById(R.id.button1);
+        
+        Marker nkut = map.addMarker(new MarkerOptions().position(NKUT).title("QUT").snippet("GP"));
+        // Move the camera instantly to NKUT with a zoom of 16.
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(NKUT, 16));
+        
+        map.setMyLocationEnabled(true);
+        map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
     }
-    private static String convertInputStreamToString(InputStream inputStream) throws IOException {
-		// TODO 自动生成的方法存根
-    	BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
-        String line = "";
-        String result = "";
-        while((line = bufferedReader.readLine()) != null)
-            result += line;
- 
-        inputStream.close();
-        return result;
+    public void CreateFence(double lat, double lng, float r, GoogleMap m){
+    	LatLng centre = new LatLng(lat,lng);
+    	m.addCircle(new CircleOptions().
+    			center(centre).
+    			radius (r).
+    			fillColor(Color.argb(182, 255, 255, 153)).
+    			strokeWidth(1).
+    			strokeColor(Color.rgb(255, 255, 153)));
+    	
+    }
+    public boolean InOrOut(double lat1, double lng1,float r){
+    	double distance = GetDistance( lat1, lng1,lat,lng);
+    	System.out.println(distance);
+    	return distance < r;
+    }
+    public void OutFence(){
+    	if (!InOrOut(la,ln,radius)){
+    		System.out.println(InOrOut(la,ln,radius));
+    		Toast.makeText(this, "You OUT of the fence now!!!!",Toast.LENGTH_LONG).show();
+    	}
+    	else{
+    		Toast.makeText(this, "You IN the fence now!!!!",Toast.LENGTH_LONG).show();
+    	}
+    }
+    public void SetGPS(){
+    	 LocationManager locMan = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+         Location loc = locMan.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+         if (loc != null) {
+             lat = loc.getLatitude();
+             Log.d(TAG, "latitude: " + lat);
+             lng = loc.getLongitude();
+             Log.d(TAG, "longitude: " + lng);
+         }
+
+         LocationListener locLis = new MyLocationListener();
+         locMan.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10000, 10,
+                         locLis);
+    }
+    private static double rad(double d)
+
+	{
+
+		return d * Math.PI / 180.0;
+
 	}
-	private class postData extends AsyncTask<Void, Void, JSONObject>{
-		ProgressDialog dialog;
-		// onPostExecute displays the results of the AsyncTask.
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			if (android.os.Build.VERSION.SDK_INT >= 11) {
-				dialog = new ProgressDialog(PantientApp.this, ProgressDialog.THEME_HOLO_LIGHT);
-			}else{
-				dialog = new ProgressDialog(PantientApp.this);
-			}
-			dialog.setMessage(Html.fromHtml("<b>"+"Loading..."+"</b>"));
-			dialog.setIndeterminate(true);
-			dialog.setCancelable(false);
-			dialog.show();
-		}
-		@Override
-        protected void onPostExecute(JSONObject result) {
-            super.onPostExecute(result);
-            if (result != null){
-            	dialog.dismiss();
-            }
-            else{
-            	 Toast.makeText(getBaseContext(), "Succes", Toast.LENGTH_LONG).show();
-            }
-       }
-		@Override
-		protected JSONObject doInBackground(Void... params) {
-			// TODO 自动生成的方法存根
-			return POST(URL,location);
-		}
+
+	public static double GetDistance(double lat1, double lng1, double lat2,
+			double lng2)
+
+	{
+		final double EARTH_RADIUS = 6378.137*1000;
+
+		double radLat1 = rad(lat1);
+
+		double radLat2 = rad(lat2);
+
+		double a = radLat1 - radLat2;
+
+		double b = rad(lng1) - rad(lng2);
+
+		double s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) +
+
+		Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+
+		s = s * EARTH_RADIUS;
+
+		//s = Math.round(s * 10000) / 10000;
+
+		return s;
+
 	}
-*/
+
+  
 	public class MyLocationListener implements LocationListener {
         @Override
         
         public void onLocationChanged(Location loc) {
-            if (loc != null) {
-            	CameraUpdate center= CameraUpdateFactory.newLatLng(new LatLng(lat,lng));
-            	CameraUpdate zoom=CameraUpdateFactory.zoomTo(15);
-            			 
-            	map.moveCamera(center);
-           		map.animateCamera(zoom);
-            			
-            }
+        	 if (loc != null) {
+             	CameraUpdate center=
+             			 CameraUpdateFactory.newLatLng(new LatLng(lat,
+             			 lng));
+             			CameraUpdate zoom=CameraUpdateFactory.zoomTo(18);
+             			 
+             			map.moveCamera(center);
+             			map.animateCamera(zoom);
+             			
+             	        System.out.println(lat);
+             	        System.out.println(lng);
+        	 }
         }
      
         @Override

@@ -5,16 +5,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 
 public class MainMenu extends Activity
 {
-	Button btn1,btn2;
+	ImageButton btn1,btn2;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
         
-        btn1 = (Button) findViewById(R.id.Pantient_btn);
+        btn1 = (ImageButton) findViewById(R.id.imageButton1);
         btn1.setOnClickListener(new View.OnClickListener(){
 
 			@Override
@@ -25,7 +26,7 @@ public class MainMenu extends Activity
 				startActivity(intent);
 			}
 		});
-        btn2 = (Button) findViewById(R.id.Caretaker_btn);
+        btn2 = (ImageButton) findViewById(R.id.imageButton2);
         btn2.setOnClickListener(new View.OnClickListener(){
 
 			@Override

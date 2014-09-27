@@ -16,8 +16,8 @@ import android.os.AsyncTask;
 
 public class POST {
 	//private static final String URL ="http://luoxin-hp/locationservice/LocationService.svc/GetLocation";
-	private static final String Postion ="http://172.19.31.119/locationservice/LocationService.svc/GetLocation";
-	private static final String Help ="http://172.19.31.119/locationservice/LocationService.svc/Alert";
+	private static final String Postion ="http://172.19.10.127/locationservice/LocationService.svc/GetLocation";
+	private static final String Help ="http://172.19.10.127/locationservice/LocationService.svc/Alert";
 	private static String URL;
 	private static String result ="";
 	

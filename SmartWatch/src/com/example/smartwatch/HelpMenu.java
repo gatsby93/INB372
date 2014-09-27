@@ -5,16 +5,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 
 public class HelpMenu extends Activity
 {
-	Button btn1,btn2,btn3;
+	ImageButton btn1,btn2;
+	Button btn3;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.help_menu);
         
-        btn1 = (Button) findViewById(R.id.Bathroom_btn);
+        btn1 = (ImageButton) findViewById(R.id.imageButton2);
         btn1.setOnClickListener(new View.OnClickListener(){
 
 			@Override
@@ -24,7 +26,7 @@ public class HelpMenu extends Activity
 				p.Post(3);
 			}
 		});
-        btn2 = (Button) findViewById(R.id.Eat_btn);
+        btn2 = (ImageButton) findViewById(R.id.imageButton1);
         btn2.setOnClickListener(new View.OnClickListener(){
 
 			@Override
