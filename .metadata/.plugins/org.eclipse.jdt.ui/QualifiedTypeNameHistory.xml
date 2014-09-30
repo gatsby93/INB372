@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="android.widget.TextView"/>
-<fullyQualifiedTypeName name="android.R.string"/>
-<fullyQualifiedTypeName name="com.example.smartwatch.R.string"/>
-<fullyQualifiedTypeName name="android.view.View"/>
-<fullyQualifiedTypeName name="android.view.MotionEvent"/>
 <fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="com.google.android.gms.internal.mc"/>
@@ -23,7 +18,6 @@
 <fullyQualifiedTypeName name="org.apache.http.params.HttpConnectionParams"/>
 <fullyQualifiedTypeName name="android.os.AsyncTask"/>
 <fullyQualifiedTypeName name="org.apache.http.protocol.HTTP"/>
-<fullyQualifiedTypeName name="com.example.smartwatch.R.id"/>
 <fullyQualifiedTypeName name="java.io.InputStream"/>
 <fullyQualifiedTypeName name="android.app.ProgressDialog"/>
 <fullyQualifiedTypeName name="android.text.Html"/>
@@ -48,7 +42,6 @@
 <fullyQualifiedTypeName name="com.google.android.gms.location.LocationClient"/>
 <fullyQualifiedTypeName name="android.support.v4.content.LocalBroadcastManager"/>
 <fullyQualifiedTypeName name="com.google.android.gms.location.Geofence"/>
-<fullyQualifiedTypeName name="java.text.DecimalFormat"/>
 <fullyQualifiedTypeName name="android.content.IntentFilter"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="com.google.android.gms.maps.model.CircleOptions"/>
@@ -58,6 +51,13 @@
 <fullyQualifiedTypeName name="android.widget.Toast"/>
 <fullyQualifiedTypeName name="com.example.gcmtest2.R.id"/>
 <fullyQualifiedTypeName name="android.widget.Button"/>
+<fullyQualifiedTypeName name="com.example.smartwatch.R.menu"/>
+<fullyQualifiedTypeName name="com.example.gcmtest2.R.menu"/>
+<fullyQualifiedTypeName name="android.os.Handler"/>
+<fullyQualifiedTypeName name="com.example.smartwatch.GcmBroadcastReceiver"/>
+<fullyQualifiedTypeName name="com.example.smartwatch.R"/>
+<fullyQualifiedTypeName name="com.example.smartwatch.R.id"/>
 <fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
+<fullyQualifiedTypeName name="java.text.DecimalFormat"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>

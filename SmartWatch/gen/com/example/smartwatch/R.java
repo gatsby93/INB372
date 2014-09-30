@@ -1490,7 +1490,7 @@ containing a value of this type.
         public static final int analogClock1=0x7f080052;
         public static final int beginning=0x7f080023;
         public static final int book_now=0x7f080010;
-        public static final int button1=0x7f080051;
+        public static final int btnTest=0x7f080051;
         public static final int buyButton=0x7f08000a;
         public static final int buy_now=0x7f08000f;
         public static final int buy_with_google=0x7f08000e;
@@ -1696,6 +1696,7 @@ containing a value of this type.
          */
         public static final int add_geofences_result_success=0x7f070042;
         public static final int app_name=0x7f070035;
+        public static final int btnTest=0x7f07006b;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 

@@ -7,6 +7,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
@@ -31,9 +32,12 @@ public class PantientApp extends FragmentActivity implements LocationListener
 	private static final String TAG = "MyActivity";
 
     private double lat, lng, la,ln;
-    private float radius;
+    private double radius;
     private Button btn1;
-	
+    public String message;
+    private Handler handler=new Handler();
+    private Runnable runnable;
+    private Context context;
     //@TargetApi(Build.VERSION_CODES.HONEYCOMB) @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,17 +47,18 @@ public class PantientApp extends FragmentActivity implements LocationListener
        radius = 200;
        //MAP
        CreateMap();
-       System.out.println("1");
+       System.out.println("Create Map Success");
        //FENCE
        CreateFence(-27.477112,153.028015,9000,map);
-       System.out.println("2");
+       System.out.println("Create Fence Success");
        //GPS
        SetGPS();
-       System.out.println("3");
+       System.out.println("Set GPS Success");
        //In or out
        OutFence();
-       System.out.println("4");
-				
+       System.out.println("Out Fence Success");
+       
+       context = getApplicationContext();
         btn1 = (Button) findViewById(R.id.postbtn);
         btn1.setOnClickListener(new View.OnClickListener(){
 
@@ -65,12 +70,64 @@ public class PantientApp extends FragmentActivity implements LocationListener
 				//lng2 = lng;
 				//Marker ml = map.addMarker(new MarkerOptions().position(new LatLng(lat2,
            			 //lng2)).title("My location").snippet("current"));
-				Intent intent = new Intent(PantientApp.this, ConfirmLoc.class);
-				startActivity(intent);
+				//Intent intent = new Intent(PantientApp.this, ConfirmLoc.class);
+				//startActivity(intent);
+				String msg1 = GcmBroadcastReceiver.getMessage();
+		        System.out.println(msg1);
+		        GcmBroadcastReceiver.clearMessage();
+		        String msg2 = GcmBroadcastReceiver.getMessage();
+		        System.out.println(msg2);
 			}
 		});
-    }
 
+       TurnONTimer(10);
+
+
+    }
+    private void TurnONTimer(final int second){
+    	 runnable=new Runnable(){
+    	        @Override
+    	        public void run() {
+    	        // TODO Auto-generated method stub
+    	        //要做的事情
+    	        String msg = GcmBroadcastReceiver.getMessage();
+    	        
+				
+    	        if (msg != "DEFAULT STRING")
+    	        {
+    	        	String[] parts = msg.split(",");
+    				Double d = Double.parseDouble(parts[0].replaceAll("\"", ""));
+    				Double d1 = Double.parseDouble(parts[1].replaceAll("\"", ""));
+    				Double d2 = Double.parseDouble(parts[2].replaceAll("\"", ""));
+    				if (parts[4] == "Fence")
+    				{
+    					Toast.makeText(context, "Your Fence is changed!!",  Toast.LENGTH_LONG).show();
+    				}else if(parts[4] == "Medical")
+    				{
+    					Toast.makeText(context, "You receive a medical alert",  Toast.LENGTH_LONG).show();
+    				}
+    				map.clear();
+    				CreateFence(d,d1,d2,map);
+    			       System.out.println("Create Fence Success");
+    			       //GPS
+    			       SetGPS();
+    			       System.out.println("Set GPS Success");
+    			       //In or out
+    			       OutFence();
+    			       System.out.println("Out Fence Success");
+    			       System.out.println(msg);
+    	    	        GcmBroadcastReceiver.clearMessage();
+    				
+    	        }
+    	        System.out.println(msg);
+    	        handler.postDelayed(this, second*1000);
+    	        }
+    	        };
+        handler.postDelayed(runnable, second*1000);//每两秒执行一次runnable.
+    }
+    private void TurnOFFTimer(){
+        handler.removeCallbacks(runnable);
+    }
     public void CreateMap(){ 
     	SupportMapFragment mf = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         map = mf.getMap();
@@ -84,7 +141,7 @@ public class PantientApp extends FragmentActivity implements LocationListener
         map.setMyLocationEnabled(true);
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
     }
-    public void CreateFence(double lat, double lng, float r, GoogleMap m){
+    public void CreateFence(double lat, double lng, double r, GoogleMap m){
     	LatLng centre = new LatLng(lat,lng);
     	m.addCircle(new CircleOptions().
     			center(centre).
@@ -94,14 +151,16 @@ public class PantientApp extends FragmentActivity implements LocationListener
     			strokeColor(Color.rgb(255, 255, 153)));
     	
     }
-    public boolean InOrOut(double lat1, double lng1,float r){
+    public boolean InOrOut(double lat1, double lng1,double r){
     	double distance = GetDistance( lat1, lng1,lat,lng);
     	System.out.println(distance);
     	return distance < r;
     }
     public void OutFence(){
+		System.out.println(InOrOut(la,ln,radius));
     	if (!InOrOut(la,ln,radius)){
-    		System.out.println(InOrOut(la,ln,radius));
+    		POST p = new POST("Help");
+    		p.Post(4);
     		Toast.makeText(this, "You OUT of the fence now!!!!",Toast.LENGTH_LONG).show();
     	}
     	else{

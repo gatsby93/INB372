@@ -359,7 +359,7 @@ int id always 0x7f08001e
 int id analogClock1 0x7f080052
 int id beginning 0x7f080023
 int id book_now 0x7f080010
-int id button1 0x7f080051
+int id btnTest 0x7f080051
 int id buyButton 0x7f08000a
 int id buy_now 0x7f08000f
 int id buy_with_google 0x7f08000e
@@ -506,6 +506,7 @@ int string add_geofences_already_requested_error 0x7f070044
 int string add_geofences_result_failure 0x7f070043
 int string add_geofences_result_success 0x7f070042
 int string app_name 0x7f070035
+int string btnTest 0x7f07006b
 int string common_google_play_services_enable_button 0x7f07000b
 int string common_google_play_services_enable_text 0x7f07000a
 int string common_google_play_services_enable_title 0x7f070009

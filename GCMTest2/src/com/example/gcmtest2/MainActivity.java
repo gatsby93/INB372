@@ -57,6 +57,7 @@ public class MainActivity extends Activity {
     SharedPreferences prefs;
     private Context context= null;
     private static final String URL ="http://172.19.10.127/locationservice/LocationService.svc/GetLocation";
+    
     TextView txtID;
     TextView txtMessage;
     JSONObject json;
@@ -352,6 +353,7 @@ public class MainActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
+	
 		return true;
 	}
 

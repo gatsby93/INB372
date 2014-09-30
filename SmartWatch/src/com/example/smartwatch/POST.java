@@ -64,6 +64,9 @@ public class POST {
 						}else if (msgType == 3){
 							jsonObject.accumulate("Patient_ID", "York");
 							jsonObject.accumulate("Message", "go to bathroom.");
+						}else if (msgType == 4){
+							jsonObject.accumulate("Patient_ID","York");
+							jsonObject.accumulate("Message", "Out of the fence.");
 						}
 						json = jsonObject.toString();
 						
