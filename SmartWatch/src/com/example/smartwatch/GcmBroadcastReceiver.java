@@ -13,6 +13,12 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
 
+
+
+
+
+
+
 //import com.example.gcmtest2.*;
 import android.app.Activity;
 import android.content.ComponentName;
@@ -23,7 +29,8 @@ import android.support.v4.content.WakefulBroadcastReceiver;
 import android.widget.Toast;
 
 public class GcmBroadcastReceiver extends WakefulBroadcastReceiver {
-	 private static final String URL ="http://172.19.10.127/locationservice/LocationService.svc/Alert";
+	 private static final String Check ="http://172.19.24.191/locationservice/LocationService.svc/CheckType";
+	 private static final String Fence ="http://172.19.24.191/locationservice/LocationService.svc/GetFence";
 	 private static String result="";
 	 public static String message="DEFAULT STRING";
 	 
@@ -36,16 +43,37 @@ public class GcmBroadcastReceiver extends WakefulBroadcastReceiver {
 		setResultCode(Activity.RESULT_OK);
 		
 		Toast.makeText(context, "WOW!!! RECEIVED NEW NOTIFCATION", Toast.LENGTH_LONG).show();
-		POST();
+		
+		POST(context);
+//		POST(Check);
+//		System.out.println("Check success");
+//		
+		
+//    	
+//    	if(test == "alert"){
+//			GcmBroadcastReceiver.clearMessage();
+//			System.out.println("Alert success");
+//		}else if(test == "fence"){
+//			System.out.println("Checking fence");
+//			GcmBroadcastReceiver.clearMessage();
+//			System.out.println("Clear");
+//			//result="";
+//			GcmBroadcastReceiver.POST(Fence);
+//			System.out.println("Posted");}
+//		
+//		clearMessage();}
+	}
+		
 		//String state = intent.getStringExtra("state");
 		//System.out.println(state);
 		
 		//MEDICINE RESPONSE FROM PATIENTS
-	}
 	
-	public void setMessage(String message)
+	
+	public static void setMessage(String msg)
 	{
-		GcmBroadcastReceiver.message = message;
+		
+		message =msg;
 	}
 	
 	public static String getMessage()
@@ -57,62 +85,66 @@ public class GcmBroadcastReceiver extends WakefulBroadcastReceiver {
 		GcmBroadcastReceiver.message = "DEFAULT STRING";
 	}
 	
-	public void POST()
+	public static void POST(Context context)
 	{
 		new AsyncTask<Void, Void, String>()
 		{
 			@Override
 			protected String doInBackground(Void... params) {
 				// TODO Auto-generated method stub
-				InputStream inputStream = null;
+				InputStream inputStream1 = null;
 				//String result ="";
 				//JSONObject json = data[0];
-				DefaultHttpClient hc = new DefaultHttpClient();
+				DefaultHttpClient hc1 = new DefaultHttpClient();
 				//HttpConnectionParams.setConnectionTimeout(hc.getParams(), 100000);
 				
-				JSONObject jsonResponse = null;
-				HttpPost httpPost = new HttpPost(URL);
+				JSONObject jsonResponse1 = null;
+				HttpPost httpPost1 = new HttpPost(Check);
 				try
 				{
 					//pLocation location;
 					//StringEntity se = new StringEntity("json"+json.toString());
 					
-					String json="";
-					JSONObject  jsonObject = new JSONObject();
-					jsonObject.accumulate("Patient_ID", "Jessica");
-					jsonObject.accumulate("Latitude", 2.2222);
-					jsonObject.accumulate("Longitude", 33.3333);
-					json = jsonObject.toString();
+					String json1="";
+					JSONObject  jsonObject1 = new JSONObject();
+					jsonObject1.accumulate("Patient_ID", "Jessica");
+					jsonObject1.accumulate("Latitude", 2.2222);
+					jsonObject1.accumulate("Longitude", 33.3333);
+					json1 = jsonObject1.toString();
 					
 					//System.out.println(json);
-					StringEntity se;
-					se = new StringEntity(json);
-					httpPost.setEntity(se);
+					StringEntity se1;
+					se1 = new StringEntity(json1);
+					httpPost1.setEntity(se1);
 					
-					httpPost.setHeader("Accept","application/json");
-					httpPost.setHeader("Content-type","application/json");
+					httpPost1.setHeader("Accept","application/json");
+					httpPost1.setHeader("Content-type","application/json");
 					//StringEntity entity = new StringEntity(json);
 					System.out.println("1");
 					//httpPost.setEntity(entity);				
 					System.out.println("2");
 				
-					HttpResponse response = (HttpResponse)hc.execute(httpPost);
+					HttpResponse response = (HttpResponse)hc1.execute(httpPost1);
 					System.out.println("3");
 
-					HttpEntity entity = response.getEntity();
+					HttpEntity entity1 = response.getEntity();
 					System.out.println("4");
 					//inputStream = response.getEntity().getContent();
 					 
-					if(entity!=null)
+					if(entity1!=null)
 					{
 						System.out.println("5");
-						InputStream instream = entity.getContent();
-						result = convertInputStreamToString(instream);
-						instream.close();
+						InputStream instream1 = entity1.getContent();
+						result = convertInputStreamToString(instream1);
+						instream1.close();
 						System.out.println("6");	
 						System.out.println(result);
 						setMessage(result);
-						System.out.println(entity.toString());
+						System.out.println(entity1.toString());
+						System.out.println("Result :"+ result);
+						System.out.println("Message :" + message);
+						String test1 = message.replaceAll("\"", "");
+				    	System.out.println("test" + test1);
 						//Toast.makeText(getBaseContext(), "Success", Toast.LENGTH_LONG).show();
 					}		
 				}
@@ -124,6 +156,83 @@ public class GcmBroadcastReceiver extends WakefulBroadcastReceiver {
 			}
 			
 		}.execute(null,null,null);
+		//if (message == "fence"){
+			Toast.makeText(context, "Your fence(s) has(have) been changed", Toast.LENGTH_LONG).show();
+			new AsyncTask<Void, Void, String>()
+			{
+				@Override
+				protected String doInBackground(Void... params) {
+					// TODO Auto-generated method stub
+					InputStream inputStream = null;
+					//String result ="";
+					//JSONObject json = data[0];
+					DefaultHttpClient hc = new DefaultHttpClient();
+					//HttpConnectionParams.setConnectionTimeout(hc.getParams(), 100000);
+				
+					JSONObject jsonResponse = null;
+					HttpPost httpPost = new HttpPost(Fence);
+					try
+					{
+						//pLocation location;
+						//StringEntity se = new StringEntity("json"+json.toString());
+						
+						String json="";
+						JSONObject  jsonObject = new JSONObject();
+						jsonObject.accumulate("Patient_ID", "Jessica");
+						jsonObject.accumulate("Latitude", 2.2222);
+						jsonObject.accumulate("Longitude", 33.3333);
+						json = jsonObject.toString();
+						
+						//System.out.println(json);
+						StringEntity se;
+						se = new StringEntity(json);
+						httpPost.setEntity(se);
+						
+						httpPost.setHeader("Accept","application/json");
+						httpPost.setHeader("Content-type","application/json");
+						//StringEntity entity = new StringEntity(json);
+						System.out.println("1");
+						//httpPost.setEntity(entity);				
+						System.out.println("2");
+						
+						HttpResponse response = (HttpResponse)hc.execute(httpPost);
+						System.out.println("3");
+						
+						HttpEntity entity = response.getEntity();
+						System.out.println("4");
+						//inputStream = response.getEntity().getContent();
+						
+						if(entity!=null)
+						{
+							System.out.println("5");
+							InputStream instream = entity.getContent();
+							result = convertInputStreamToString(instream);
+							instream.close();
+							System.out.println("6");	
+							System.out.println(result);
+							setMessage(result);
+							System.out.println(entity.toString());
+							System.out.println("Result :"+ result);
+							System.out.println("Message :" + message);
+							String test = message.replaceAll("\"", "");
+							System.out.println("test" + test);
+							//Toast.makeText(getBaseContext(), "Success", Toast.LENGTH_LONG).show();
+						}			
+					}
+					catch(Exception e)
+					{
+						e.printStackTrace();
+					}	
+					return null;
+				}
+			
+			}.execute(null,null,null);
+			//}else if (message == "alert"){
+				//Toast.makeText(context, "You receive an alert", Toast.LENGTH_LONG).show();
+				/**
+				 * Need add dialog to confirm whether the patient take pills
+				**/
+			//}
 	}
 	
 	private static String convertInputStreamToString(InputStream inputStream) throws IOException{

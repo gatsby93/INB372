@@ -30,9 +30,10 @@ public class PantientApp extends FragmentActivity implements LocationListener
 	private GoogleMap map;
 	
 	private static final String TAG = "MyActivity";
+	// private static final String Fence ="http://172.19.35.172/locationservice/LocationService.svc/GetFence";
 
-    private double lat, lng, la,ln;
-    private double radius;
+    private double lat, lng;
+    private double[] la,ln, radius;
     private Button btn1;
     public String message;
     private Handler handler=new Handler();
@@ -42,21 +43,24 @@ public class PantientApp extends FragmentActivity implements LocationListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_watch);
-       la = -27.477112;
-       ln = 153.028015;
-       radius = 200;
+       la = new double[3];
+       ln = new double[3];
+       radius = new double[3];
+       la[0] = -27.477112;
+       ln[0] = 153.028015;
+       radius[0] = 200;
        //MAP
        CreateMap();
        System.out.println("Create Map Success");
        //FENCE
-       CreateFence(-27.477112,153.028015,9000,map);
+       CreateFence(-27.477112,153.028015,9000,map,1);
        System.out.println("Create Fence Success");
        //GPS
        SetGPS();
        System.out.println("Set GPS Success");
        //In or out
-       OutFence();
-       System.out.println("Out Fence Success");
+       OutFence(0);
+       System.out.println("In or Out(1) set Success");
        
        context = getApplicationContext();
         btn1 = (Button) findViewById(R.id.postbtn);
@@ -89,33 +93,98 @@ public class PantientApp extends FragmentActivity implements LocationListener
     	        @Override
     	        public void run() {
     	        // TODO Auto-generated method stub
-    	        //要做的事情
+
     	        String msg = GcmBroadcastReceiver.getMessage();
-    	        
-				
+    	        				
     	        if (msg != "DEFAULT STRING")
     	        {
+    	        	
+    	        	System.out.println(msg);
+    	        	map.clear();
+    				System.out.println("Map cleared");
+    				SetGPS();
+ 			        System.out.println("reset GPS Success");
     	        	String[] parts = msg.split(",");
-    				Double d = Double.parseDouble(parts[0].replaceAll("\"", ""));
-    				Double d1 = Double.parseDouble(parts[1].replaceAll("\"", ""));
-    				Double d2 = Double.parseDouble(parts[2].replaceAll("\"", ""));
-    				if (parts[4] == "Fence")
-    				{
-    					Toast.makeText(context, "Your Fence is changed!!",  Toast.LENGTH_LONG).show();
-    				}else if(parts[4] == "Medical")
-    				{
-    					Toast.makeText(context, "You receive a medical alert",  Toast.LENGTH_LONG).show();
-    				}
-    				map.clear();
-    				CreateFence(d,d1,d2,map);
-    			       System.out.println("Create Fence Success");
+    	        	System.out.println("Array size:"+parts.length);
+    	        	System.out.println("parts[0]:"+parts[0]);
+    	        	System.out.println("parts[3]:"+parts[3]);
+    	        	System.out.println("parts[6]:"+parts[6].length()+"fuck");
+    	        	System.out.println("parts[9]:"+parts[9]);
+    	        	if (parts[0].length() != 0){
+    	        		Double d0 = Double.parseDouble(parts[0].replaceAll("\"", ""));
+    					Double d1 = Double.parseDouble(parts[1].replaceAll("\"", ""));
+    					Double d2 = Double.parseDouble(parts[2].replaceAll("\"", ""));
+    					System.out.println("fence1 lat:"+d0);
+        	        	System.out.println("fence1 lng:"+d1);
+        	        	System.out.println("fence1 radius:"+d2);
+        	        	CreateFence(d0,d1,d2,map,1);
+        	        	System.out.println("Fence1 created");
+        	        	la[0]=d0;
+        	        	ln[0]=d1;
+        	        	radius[0]=d2;
+        	        	System.out.println("Input Lat, Lng and radius:"+la[0]+ln[0]+radius[0]);
+        	        	//In or out
+        	            OutFence(0);
+        	            System.out.println("In or Out(1) reset Success");
+        	        	if (parts[3].length() != 0 ){
+        	        		Double d3 = Double.parseDouble(parts[3].replaceAll("\"", ""));
+        	        		Double d4 = Double.parseDouble(parts[4].replaceAll("\"", ""));
+        	        		Double d5 = Double.parseDouble(parts[5].replaceAll("\"", ""));
+        	        		System.out.println("fence2 lat:"+d3);
+        	        		System.out.println("fence2 lng:"+d4);
+        	        		System.out.println("fence2 radius:"+d5);
+        	        		CreateFence(d3,d4,d5,map,2);
+        	        		System.out.println("Fence2 created");
+        	        		la[1]=d3;
+            	        	ln[1]=d4;
+            	        	radius[1]=d5;
+            	        	System.out.println("Input Lat, Lng and radius:"+la[1]+ln[1]+radius[1]);
+            	        	//In or out
+            	            OutFence(1);
+            	            System.out.println("In or Out(2) reset Success");
+        	        		if (parts[6].length() != 0 ){
+        	        			Double d6 = Double.parseDouble(parts[6].replaceAll("\"", ""));
+        	        			Double d7 = Double.parseDouble(parts[7].replaceAll("\"", ""));
+        	        			Double d8 = Double.parseDouble(parts[8].replaceAll("\"", ""));
+        	        			System.out.println("fence3 lat:"+d6);
+        	        			System.out.println("fence3 lng:"+d7);
+        	        			System.out.println("fence3 radius:"+d8);
+        	        			CreateFence(d6,d7,d8,map,3);
+        	        			System.out.println("Fence3 created");
+        	        			la[2]=d6;
+                	        	ln[2]=d7;
+                	        	radius[2]=d8;
+                	        	System.out.println("Input Lat, Lng and radius:"+la[2]+ln[2]+radius[2]);
+                	        	//In or out
+                	            OutFence(2);
+                	            System.out.println("In or Out(3) reset Success");
+        	        		}else {System.out.println("Invaild value of fence3");}
+        	        	}else{System.out.println("Invail value of fence2");}
+    	        	}else{System.out.println("Invaild value of fence1");}
+    	        	System.out.println("reset Fence Success");
+//    				Double d6= Double.parseDouble(parts[6].replaceAll("\"", ""));
+//    				Double d7 = Double.parseDouble(parts[7].replaceAll("\"", ""));
+//    				Double d8 = Double.parseDouble(parts[8].replaceAll("\"", ""));
+//    				if (parts[4] == "Fence")
+//    				{
+//    					Toast.makeText(context, "Your Fence is changed!!",  Toast.LENGTH_LONG).show();
+//    				}else if(parts[4] == "Medical")
+//    				{
+//    					Toast.makeText(context, "You receive a medical alert",  Toast.LENGTH_LONG).show();
+//    				}
+    				
+    				//CreateFence(d0,d1,d2,map,1);
+    				
+    				//CreateFence(d3,d4,d5,map,2);
+    				
+    				//CreateFence(d6,d7,d8,map);
+    			       
     			       //GPS
-    			       SetGPS();
-    			       System.out.println("Set GPS Success");
+    			       
     			       //In or out
-    			       OutFence();
-    			       System.out.println("Out Fence Success");
-    			       System.out.println(msg);
+    			       //OutFence();
+    			       //System.out.println("Out Fence Success");
+    			       //System.out.println(msg);
     	    	        GcmBroadcastReceiver.clearMessage();
     				
     	        }
@@ -134,14 +203,14 @@ public class PantientApp extends FragmentActivity implements LocationListener
         //TextView text=(EditText)findViewById(R.id.text_View); 
         //Button but=(Button)findViewById(R.id.button1);
         
-        Marker nkut = map.addMarker(new MarkerOptions().position(NKUT).title("QUT").snippet("GP"));
+        Marker nkut = map.addMarker(new MarkerOptions().position(NKUT).title("Fence").snippet("NO.1"));
         // Move the camera instantly to NKUT with a zoom of 16.
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(NKUT, 16));
         
         map.setMyLocationEnabled(true);
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
     }
-    public void CreateFence(double lat, double lng, double r, GoogleMap m){
+    public void CreateFence(double lat, double lng, double r, GoogleMap m, int reference){
     	LatLng centre = new LatLng(lat,lng);
     	m.addCircle(new CircleOptions().
     			center(centre).
@@ -149,6 +218,19 @@ public class PantientApp extends FragmentActivity implements LocationListener
     			fillColor(Color.argb(182, 255, 255, 153)).
     			strokeWidth(1).
     			strokeColor(Color.rgb(255, 255, 153)));
+    	if(reference == 1 )
+    	{
+    		LatLng Fence1 = new LatLng(lat,lng);
+    		Marker fence1 = map.addMarker(new MarkerOptions().position(Fence1).title("Fence").snippet("NO.1"));
+    	}else if(reference == 2)
+    	{
+    		LatLng Fence2 = new LatLng(lat,lng);
+    		Marker fence2 = map.addMarker(new MarkerOptions().position(Fence2).title("Fence").snippet("NO.2"));
+    	}else if(reference == 3)
+    	{
+    		LatLng Fence3 = new LatLng(lat,lng);
+    		Marker fence3 = map.addMarker(new MarkerOptions().position(Fence3).title("Fence").snippet("NO.3"));
+    	}
     	
     }
     public boolean InOrOut(double lat1, double lng1,double r){
@@ -156,15 +238,15 @@ public class PantientApp extends FragmentActivity implements LocationListener
     	System.out.println(distance);
     	return distance < r;
     }
-    public void OutFence(){
-		System.out.println(InOrOut(la,ln,radius));
-    	if (!InOrOut(la,ln,radius)){
+    public void OutFence(int i){
+		System.out.println(InOrOut(la[i],ln[i],radius[i]));
+    	if (!InOrOut(la[i],ln[i],radius[i])){
     		POST p = new POST("Help");
-    		p.Post(4);
-    		Toast.makeText(this, "You OUT of the fence now!!!!",Toast.LENGTH_LONG).show();
+    		p.Post(i+4);
+    		Toast.makeText(this, "You OUT of the fence"+(i+1)+" now!!!!",Toast.LENGTH_LONG).show();
     	}
     	else{
-    		Toast.makeText(this, "You IN the fence now!!!!",Toast.LENGTH_LONG).show();
+    		Toast.makeText(this, "You IN the fence"+(i+1)+" now!!!!",Toast.LENGTH_LONG).show();
     	}
     }
     public void SetGPS(){
@@ -269,4 +351,5 @@ public class PantientApp extends FragmentActivity implements LocationListener
 		// TODO 自动生成的方法存根
 		
 	}
+	
 }
