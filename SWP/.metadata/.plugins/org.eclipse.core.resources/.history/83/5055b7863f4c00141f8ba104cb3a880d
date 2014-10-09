@@ -1,0 +1,72 @@
+package com.example.gcmtest2;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.Toast;
+
+public class Medication extends Activity {
+	
+	Button btn1;
+	
+	protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.patient_medication);
+	
+        btn1 = (Button) findViewById(R.id.button1);
+        
+        btn1.setOnClickListener(new OnClickListener() {
+        	 
+            public void onClick(View arg0) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(
+                        Medication.this);
+ 
+                // Set Alert Dialog Title
+                builder.setTitle("Alert Dialog Tutorial");
+ 
+                // Set an Icon for this Alert Dialog
+                builder.setIcon(R.drawable.logo);
+ 
+                // Set Alert Dialog Message
+                builder.setMessage("Did you take medicine?")
+ 
+                        // Positive button functionality
+                        .setPositiveButton("Yes",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,
+                                            int arg0) {
+                                        Toast.makeText(
+                                        		Medication.this,
+                                                "You clicked on Yes",
+                                                Toast.LENGTH_SHORT).show();
+                                        // Do more stuffs
+                                        // finish();
+                                    }
+                                })
+                        // Negative button functionality
+                        .setNegativeButton("No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,
+                                            int arg0) {
+                                        Toast.makeText(
+                                        		Medication.this,
+                                                "You clicked on No",
+                                                Toast.LENGTH_SHORT).show();
+                                        // Do more stuffs
+                                        // dialog.cancel();
+                                    }
+                                });
+ 
+                // Create the Alert Dialog
+                AlertDialog alertdialog = builder.create();
+ 
+                // Show Alert Dialog
+                alertdialog.show();
+            }
+        });
+    }
+}

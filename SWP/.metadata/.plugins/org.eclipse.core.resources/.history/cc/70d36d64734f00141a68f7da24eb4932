@@ -1,0 +1,68 @@
+package com.example.gcmtest2;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v4.content.WakefulBroadcastReceiver;
+import android.widget.Toast;
+
+
+public class GcmBroadcastReceiver extends WakefulBroadcastReceiver {
+
+	
+	//GCMINTENTSERVICE MIGHT NEED TO DELETE FROM DEFAULT PACKAGE
+	@Override
+	public void onReceive(Context context, Intent intent) {
+		// TODO Auto-generated method stub
+		ComponentName comp = new ComponentName(context.getPackageName(),GcmIntentService.class.getName());
+		startWakefulService(context,(intent.setComponent(comp)));
+		setResultCode(Activity.RESULT_OK);
+		
+		Toast.makeText(context, "WOW!!! RECEIVED NEW NOTIFCATION", Toast.LENGTH_LONG).show();
+		
+		//
+				
+		
+		 AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+         // Set Alert Dialog Title
+         builder.setTitle("Medication Alert");
+
+         // Set an Icon for this Alert Dialog
+         builder.setIcon(R.drawable.slogo);
+
+         // Set Alert Dialog Message
+         builder.setMessage("Did you take medicine?")
+
+                 // Positive button functionality
+                 .setPositiveButton("No",
+                         new DialogInterface.OnClickListener() {
+                             public void onClick(DialogInterface dialog,
+                                     int arg0) {
+                                 //Toast.makeText(context,"You clicked on No",Toast.LENGTH_SHORT).show();                                                                              
+                                 // Do more stuffs
+                                 // finish();
+                             }
+                         })
+                 // Negative button functionality
+                 .setNegativeButton("Yes",
+                         new DialogInterface.OnClickListener() {
+                             public void onClick(DialogInterface dialog,
+                                     int arg0) {
+                                 //Toast.makeText(Medication.this, "You clicked on Yes",Toast.LENGTH_SHORT).show();                                                                          
+                                 // Do more stuffs
+                                 // dialog.cancel();
+                             }
+                         });
+
+         // Create the Alert Dialog
+         AlertDialog alertdialog = builder.create();
+
+         // Show Alert Dialog
+         alertdialog.show();
+	}
+
+}
